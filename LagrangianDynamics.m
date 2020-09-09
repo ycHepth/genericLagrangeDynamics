@@ -1,4 +1,4 @@
-function [H,C,G] = LagrangianDynamics(dh_list, mass_list, mass_center_list, inertia_tensor_list)
+function [H,C,G,J] = LagrangianDynamics(dh_list, mass_list, mass_center_list, inertia_tensor_list)
 % reference:https://www.jianshu.com/p/6d04539f1cfe
 % check DH parameters list
 [rows, columns] = size(dh_list);
