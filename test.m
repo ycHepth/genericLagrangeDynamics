@@ -28,7 +28,7 @@ inertia_tensor(:,:,1) = inertia_1;
 inertia_tensor(:,:,2) = inertia_2;
 inertia_tensor(:,:,3) = inertia_3;
 
-[h,c,g,J] = LagrangianDynamics(dh_params, mass, mass_center, inertia_tensor)
+[h,c,g] = LagrangianDynamics(dh_params, mass, mass_center, inertia_tensor)
 
 % h =
  

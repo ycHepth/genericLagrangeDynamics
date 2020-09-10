@@ -1,4 +1,4 @@
-function [H,C,G,J] = LagrangianDynamics(dh_list, mass_list, mass_center_list, inertia_tensor_list)
+function [H,C,G] = LagrangianDynamics(dh_list, mass_list, mass_center_list, inertia_tensor_list)
 % reference:https://www.jianshu.com/p/6d04539f1cfe
 % check DH parameters list
 [rows, columns] = size(dh_list);
@@ -34,7 +34,6 @@ end
 A = simplify(A);
 
 % calculate th expression of each linkage coordinate to {0} coordinate
-% 计算每个连杆坐标系在{0}系下的表达
 A0 = sym([]);
 for i = 1:number_of_links
     A0(:,:,i) = eye(4,4);
@@ -49,7 +48,6 @@ for i = 1:number_of_links
     J(:,:,i) = JMatrix(mass_list(i),mass_center_list(i,:),inertia_tensor_list(:,:,i));
 end
 
-% 计算H(q),由H(q)对称性，只需计算上三角部分
 syms tr
 for i = 1:number_of_links
     for j = i:number_of_links
@@ -63,7 +61,7 @@ for i = 1:number_of_links
     end
 end
 
-% 计算C(q)
+% C(q)
 for i = 1:number_of_links
     for j = 1:number_of_links
         c = 0;
@@ -79,7 +77,7 @@ end
 syms gc
 g = [0,0,-gc,0]';
 
-% 计算G(q)
+% G(q)
 for i = 1:number_of_links
     gi = 0;
     for j = 1:number_of_links
